@@ -10,4 +10,25 @@ html {
 body {
   margin: 0;
   font: $base-text-size / 1 $base-font-family;
+  font-family: Gotham;
+}
+
+.NavItem {
+  font-size: 30px;
+}
+
+.Toolbar {
+  height: 80px;
+}
+
+.LetterIndex {
+  margin: 20px;
+}
+
+
+.Breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 10px;
 }
