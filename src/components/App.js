@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NewEntry from './NewEntry'
 import Home from './Home'
 import LetterIndex from './LetterIndex'
+import SearchResult from './SearchResult'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import { Toolbar,
   NavItem,
@@ -11,6 +12,8 @@ import { Toolbar,
   Overlay,
   Space,
   Footer } from 'rebass'
+
+import theme from './theme'
 
 class App extends Component {
   state = {
@@ -23,14 +26,14 @@ class App extends Component {
     })
   }
 
-  _submit = (e) => {
-    e.preventDefault()
-    const query = this.refs.query.value
-    const path = query.length > 0 ? `/search/${query}` : '/'
-    this.props.history.push(path)
-    this.setState({
-      query
-    })
+  static childContextTypes = {
+    rebass: React.PropTypes.object
+  }
+
+  getChildContext () {
+    return {
+      rebass: theme
+    }
   }
   render () {
     return <Router>
@@ -44,13 +47,13 @@ class App extends Component {
             name='inline_form'
             onChange={function noRefCheck () {}}
             onClick={function noRefCheck () {}}
-            onSubmit={this._submit}
             backgroundColor='white'
         />
         </Toolbar>
         <LetterIndex />
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route path='/search/:word' component={SearchResult} />
         </Switch>
         <Footer>
           <Text> Built with &hearts; at The Iron Yard. </Text>
